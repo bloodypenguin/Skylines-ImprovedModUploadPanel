@@ -1,10 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using ColossalFramework.IO;
-using ColossalFramework.PlatformServices;
-using ColossalFramework.UI;
-using ImprovedModUploadPanel.Detours;
+﻿using ImprovedModUploadPanel.Detours;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -46,11 +40,5 @@ namespace ImprovedModUploadPanel
             WorkshopModUploadPanelDetour.TearDownUI();
             Object.DestroyImmediate(go);
         }
-
-
-
-
-
     }
-
 }

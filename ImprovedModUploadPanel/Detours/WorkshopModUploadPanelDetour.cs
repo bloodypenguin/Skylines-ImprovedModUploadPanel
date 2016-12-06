@@ -22,6 +22,8 @@ namespace ImprovedModUploadPanel.Detours
         private static FieldInfo m_ContentPath;
         private static FieldInfo m_CurrentHandle;
         private static UIButton m_ShareButton;
+        private static UIProgressBar m_UpdateBar;
+        private static UILabel m_UpdateText;
         private static FieldInfo m_TargetFolder;
         private static UITextField m_Title;
         private static UITextField m_Desc;
@@ -75,6 +77,9 @@ namespace ImprovedModUploadPanel.Detours
             m_ChangeNote = _workshopModUploadPanel.Find<UITextField>("ChangeNote");
             m_ShareButton = _workshopModUploadPanel.Find<UIButton>("Share");
 
+            m_UpdateBar = _workshopModUploadPanel.Find<UIProgressBar>("UpdateBar");
+            m_UpdateText = _workshopModUploadPanel.Find<UILabel>("UpdateText");
+
             return true;
         }
 
@@ -87,6 +92,8 @@ namespace ImprovedModUploadPanel.Detours
             m_CurrentHandle = null;
             m_ShareButton = null;
             m_TargetFolder = null;
+            m_UpdateText = null;
+            m_UpdateBar = null;
             m_ShareButton = null;
             m_Title = null;
             m_Desc = null;
@@ -109,6 +116,9 @@ namespace ImprovedModUploadPanel.Detours
             m_ContentPath.SetValue(_workshopModUploadPanel, null);
             m_CurrentHandle.SetValue(_workshopModUploadPanel, UGCHandle.invalid);
             m_ShareButton.isEnabled = false;
+            m_UpdateText.isVisible = false;
+            m_UpdateBar.isVisible = false;
+
             m_TargetFolder.SetValue(_workshopModUploadPanel, folder);
             m_ShareButton.isEnabled = true;
 

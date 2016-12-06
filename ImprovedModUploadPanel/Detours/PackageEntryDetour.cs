@@ -7,7 +7,7 @@ using ICities;
 using UnityEngine;
 using Object = System.Object;
 
-namespace ImprovedModUploadPanel
+namespace ImprovedModUploadPanel.Detours
 {
     public class PackageEntryDetour : PackageEntry
     {
@@ -33,6 +33,7 @@ namespace ImprovedModUploadPanel
             );
         }
 
+        //redirect
         private void ShareRoutine()
         {
             if (this.m_PluginInfo != null)
@@ -46,8 +47,8 @@ namespace ImprovedModUploadPanel
                     var instances = pluginInfo.GetInstances<IUserMod>();
                     if (instances.Length == 1)
                     {
-                        ImprovedModUploadPanel.Title = instances[0].Name;
-                        ImprovedModUploadPanel.Description = $"[h1]{instances[0].Description}[/h1]";
+                        WorkshopModUploadPanelDetour.Title = instances[0].Name;
+                        WorkshopModUploadPanelDetour.Description = $"[h1]{instances[0].Description}[/h1]";
                     }
                     else
                     {
@@ -70,7 +71,7 @@ namespace ImprovedModUploadPanel
             }
             else
             {
-                if (!(this.asset != (Package.Asset)null) || !(this.asset.type == UserAssetType.MapMetaData) && !(this.asset.type == UserAssetType.SaveGameMetaData) && (!(this.asset.type == UserAssetType.CustomAssetMetaData) && !(this.asset.type == UserAssetType.ColorCorrection)) && (!(this.asset.type == UserAssetType.DistrictStyleMetaData) && !(this.asset.type == UserAssetType.MapThemeMetaData)))
+                if (!(this.asset != (Package.Asset)null) || !(this.asset.type == UserAssetType.MapMetaData) && !(this.asset.type == UserAssetType.ScenarioMetaData) && (!(this.asset.type == UserAssetType.SaveGameMetaData) && !(this.asset.type == UserAssetType.CustomAssetMetaData)) && (!(this.asset.type == UserAssetType.ColorCorrection) && !(this.asset.type == UserAssetType.DistrictStyleMetaData) && (!(this.asset.type == UserAssetType.MapThemeMetaData) && !(this.asset.type == UserAssetType.ScenarioMetaData))))
                     return;
                 WorkshopAssetUploadPanel assetUploadPanel = UIView.library.ShowModal<WorkshopAssetUploadPanel>("WorkshopAssetUploadPanel");
                 if ((Object)assetUploadPanel == (Object)null)

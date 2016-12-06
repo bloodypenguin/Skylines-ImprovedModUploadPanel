@@ -32,7 +32,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Detours\WorkshopModUploadPanelDetour.cs" />
-    <Compile Include="LoadingExtension.cs" />
     <Compile Include="Mod.cs" />
     <Compile Include="ImprovedModUploadPanel.cs" />
     <Compile Include="Detours\PackageEntryDetour.cs" />

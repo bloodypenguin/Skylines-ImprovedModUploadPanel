@@ -1,4 +1,5 @@
 ﻿using ICities;
+using ImprovedModUploadPanel.Detours;
 
 namespace ImprovedModUploadPanel
 {
@@ -6,15 +7,21 @@ namespace ImprovedModUploadPanel
     {
         public static bool bootstrapped;
 
+        public Mod()
+        {
+            if (!bootstrapped)
+            {
+                WorkshopModUploadPanelDetour.Deploy();
+                PackageEntryDetour.Deploy();
+                bootstrapped = true;
+            }
+        }
+
         public string Name
         {
             get
             {
-                if (!bootstrapped)
-                {
-                    ImprovedModUploadPanel.Initialize();
-                    bootstrapped = true;
-                }
+                ImprovedModUploadPanel.Initialize();
                 return "Improved Mod Upload Panel";
             }
         }

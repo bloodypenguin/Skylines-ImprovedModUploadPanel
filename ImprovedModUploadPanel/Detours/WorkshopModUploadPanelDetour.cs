@@ -14,9 +14,6 @@ namespace ImprovedModUploadPanel.Detours
         private static WorkshopModUploadPanel _workshopModUploadPanel;
 
 
-        private static RedirectCallsState _setAssetInternalState;
-
-
         private static FieldInfo m_StagingPath;
         private static FieldInfo m_PreviewPath;
         private static FieldInfo m_ContentPath;
@@ -40,11 +37,11 @@ namespace ImprovedModUploadPanel.Detours
 
         public static void Deploy()
         {
-            _setAssetInternalState = RedirectionHelper.RedirectCalls
+            RedirectionHelper.RedirectCalls
             (
                 typeof(WorkshopModUploadPanel).GetMethod("SetAssetInternal",
                     BindingFlags.Instance | BindingFlags.NonPublic),
-                typeof(ImprovedModUploadPanel).GetMethod("SetAssetInternal",
+                typeof(WorkshopModUploadPanelDetour).GetMethod("SetAssetInternal",
                     BindingFlags.Instance | BindingFlags.NonPublic)
             );
         }
@@ -100,13 +97,6 @@ namespace ImprovedModUploadPanel.Detours
             m_ChangeNote = null;
             m_DefaultModPreviewTexture = null;
         }
-
-        public static void Revert()
-        {
-            RedirectionHelper.RevertRedirect(typeof(WorkshopModUploadPanel).GetMethod("SetAssetInternal",
-                    BindingFlags.Instance | BindingFlags.NonPublic), _setAssetInternalState);
-        }
-
 
         //redirect
         private void SetAssetInternal(string folder)

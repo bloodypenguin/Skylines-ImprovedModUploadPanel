@@ -11,25 +11,15 @@ namespace ImprovedModUploadPanel.Detours
 {
     public class PackageEntryDetour : PackageEntry
     {
-        private static RedirectCallsState _state;
 
-        public static void Initialize()
+        public static void Deploy()
         {
-            _state = RedirectionHelper.RedirectCalls
+            RedirectionHelper.RedirectCalls
             (
                 typeof(PackageEntry).GetMethod("ShareRoutine",
                     BindingFlags.Instance | BindingFlags.NonPublic),
                 typeof(PackageEntryDetour).GetMethod("ShareRoutine",
                     BindingFlags.Instance | BindingFlags.NonPublic)
-            );
-        }
-
-        public static void Revert()
-        {
-            RedirectionHelper.RevertRedirect(
-                typeof(PackageEntry).GetMethod("ShareRoutine",
-                    BindingFlags.Instance | BindingFlags.NonPublic),
-                _state
             );
         }
 

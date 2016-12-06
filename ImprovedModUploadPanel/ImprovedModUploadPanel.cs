@@ -1,44 +1,44 @@
 ﻿using ImprovedModUploadPanel.Detours;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace ImprovedModUploadPanel
 {
 
-    public class ImprovedModUploadPanel
+    public class ImprovedModUploadPanel : MonoBehaviour
     {
+        private bool _initialized;
+
         public static void Initialize()
         {
             if (GameObject.Find("ImprovedModUploadPanel") != null)
             {
                 return;
             }
-            WorkshopModUploadPanelDetour.Deploy();
             var go = new GameObject("ImprovedModUploadPanel");
-            var updateHook = go.AddComponent<UpdateHook>();
-            updateHook.once = false;
-            updateHook.onUnityUpdate = () =>
-            {
-                if (!WorkshopModUploadPanelDetour.SetupUI())
-                {
-                    return;
-                }
-                PackageEntryDetour.Initialize();
-                updateHook.once = true;
-            };
+            go.AddComponent<ImprovedModUploadPanel>();
         }
 
-        public static void Revert()
+        public void Update()
         {
-            var go = GameObject.Find("ImprovedModUploadPanel");
-            if (go == null)
+            if (_initialized)
             {
                 return;
             }
-            PackageEntryDetour.Revert();
-            WorkshopModUploadPanelDetour.Revert();
+            if (!WorkshopModUploadPanelDetour.SetupUI())
+            {
+                return;
+            }          
+            _initialized = true;
+        }
+
+        public void OnDestroy()
+        {
+            if (!_initialized)
+            {
+                return;
+            }
             WorkshopModUploadPanelDetour.TearDownUI();
-            Object.DestroyImmediate(go);
+            _initialized = false;
         }
     }
 }

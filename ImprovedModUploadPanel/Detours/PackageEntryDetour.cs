@@ -26,7 +26,7 @@ namespace ImprovedModUploadPanel.Detours
         //redirect
         private void ShareRoutine()
         {
-            if (this.m_PluginInfo != null)
+            if (this.pluginInfo != null)
             {
                 WorkshopModUploadPanel workshopModUploadPanel = UIView.library.ShowModal<WorkshopModUploadPanel>("WorkshopModUploadPanel");
                 if ((Object)workshopModUploadPanel == (Object)null)
@@ -57,7 +57,7 @@ namespace ImprovedModUploadPanel.Detours
                 }
 
 
-                workshopModUploadPanel.SetAsset(this.m_PluginInfo.modPath, this.m_PublishedFileId);
+                workshopModUploadPanel.SetAsset(this.pluginInfo.modPath, this.publishedFileId);
             }
             else
             {
@@ -66,7 +66,7 @@ namespace ImprovedModUploadPanel.Detours
                 WorkshopAssetUploadPanel assetUploadPanel = UIView.library.ShowModal<WorkshopAssetUploadPanel>("WorkshopAssetUploadPanel");
                 if ((Object)assetUploadPanel == (Object)null)
                     return;
-                assetUploadPanel.SetAsset(this.asset, this.m_PublishedFileId);
+                assetUploadPanel.SetAsset(this.asset, this.publishedFileId);
             }
         }
     }

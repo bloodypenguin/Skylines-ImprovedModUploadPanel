@@ -1,30 +1,19 @@
 ﻿using ICities;
 using ImprovedModUploadPanel.Detours;
+using ImprovedModUploadPanel.Redirection;
 
 namespace ImprovedModUploadPanel
 {
     public class Mod : IUserMod
     {
-        public static bool bootstrapped;
 
         public Mod()
         {
-            if (!bootstrapped)
-            {
-                WorkshopModUploadPanelDetour.Deploy();
-                PackageEntryDetour.Deploy();
-                bootstrapped = true;
-            }
+            Redirector<WorkshopModUploadPanelDetour>.Deploy();
+            Redirector<PackageEntryDetour>.Deploy();
         }
 
-        public string Name
-        {
-            get
-            {
-                ImprovedModUploadPanel.Initialize();
-                return "Improved Mod Upload Panel";
-            }
-        }
+        public string Name => "Improved Mod Upload Panel";
 
         public string Description => "Improved Mod Upload Panel";
     }

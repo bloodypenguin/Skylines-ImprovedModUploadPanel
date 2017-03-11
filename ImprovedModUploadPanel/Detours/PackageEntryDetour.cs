@@ -4,26 +4,16 @@ using ColossalFramework.Packaging;
 using ColossalFramework.Plugins;
 using ColossalFramework.UI;
 using ICities;
+using ImprovedModUploadPanel.Redirection;
 using UnityEngine;
 using Object = System.Object;
 
 namespace ImprovedModUploadPanel.Detours
 {
+    [TargetType(typeof(PackageEntry))]
     public class PackageEntryDetour : PackageEntry
     {
-
-        public static void Deploy()
-        {
-            RedirectionHelper.RedirectCalls
-            (
-                typeof(PackageEntry).GetMethod("ShareRoutine",
-                    BindingFlags.Instance | BindingFlags.NonPublic),
-                typeof(PackageEntryDetour).GetMethod("ShareRoutine",
-                    BindingFlags.Instance | BindingFlags.NonPublic)
-            );
-        }
-
-        //redirect
+        [RedirectMethod]
         private void ShareRoutine()
         {
             if (this.pluginInfo != null)

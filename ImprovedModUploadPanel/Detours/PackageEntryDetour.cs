@@ -21,7 +21,7 @@ namespace ImprovedModUploadPanel.Detours
                 WorkshopModUploadPanel workshopModUploadPanel = UIView.library.ShowModal<WorkshopModUploadPanel>("WorkshopModUploadPanel");
                 if ((Object)workshopModUploadPanel == (Object)null)
                     return;
-
+                //begin mod
                 try
                 {
                     var instances = pluginInfo.GetInstances<IUserMod>();
@@ -45,8 +45,7 @@ namespace ImprovedModUploadPanel.Detours
                     Debug.LogException(ex);
                     UIView.ForwardException((Exception)new ModException("A Mod caused an error", ex));
                 }
-
-
+                //end mod
                 workshopModUploadPanel.SetAsset(this.pluginInfo.modPath, this.publishedFileId);
             }
             else

@@ -109,7 +109,7 @@ namespace ImprovedModUploadPanel.Detours
                 if (texture2D != null)
                     File.WriteAllBytes(m_PreviewPath, texture2D.EncodeToPNG());
             }
-
+            //end mod
             ReloadPreviewImage();
             this.m_ContentPath = Path.Combine(this.m_StagingPath, "Content" + (object)Path.DirectorySeparatorChar);
             Directory.CreateDirectory(this.m_ContentPath);

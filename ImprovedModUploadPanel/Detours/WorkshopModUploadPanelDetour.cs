@@ -45,7 +45,11 @@ namespace ImprovedModUploadPanel.Detours
                 WorkshopHelper.VerifyAndFinalizeFiles(files, this.m_PublishedFileId.ToString());
                 //begin mod
                 string version = BuildConfig.applicationVersion;
-                this.m_CurrentHandle = PlatformService.workshop.UpdateItem(this.m_PublishedFileId, text1, text2, text3, this.m_PreviewPath, this.m_ContentPath, new string[2] { "Mod", $"{version}-compatible" });
+                this.m_CurrentHandle = PlatformService.workshop.UpdateItem(this.m_PublishedFileId, text1, text2, text3, this.m_PreviewPath, this.m_ContentPath, new string[2]
+                {
+                    !IsCameraScript() ? "Mod" : "Cinematic Cameras",
+                    $"{version}-compatible"
+                });
                 //end mod
             }
             catch (Exception ex)
@@ -129,6 +133,14 @@ namespace ImprovedModUploadPanel.Detours
         private void StartWatchingPath()
         {
             UnityEngine.Debug.Log("StartWatchingPath");
+        }
+        
+        [RedirectReverse]
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private bool IsCameraScript()
+        {
+            UnityEngine.Debug.Log("IsCameraScript");
+            return false;
         }
 
         private PublishedFileId m_PublishedFileId => (PublishedFileId)this.GetType().GetField("m_PublishedFileId", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(this);
